@@ -19,8 +19,8 @@ jobs:
           set -e
           unzip -o NEXUS_CODE_iPhone_GitHub.zip
           test -f package.json
-          rm NEXUS_CODE_iPhone_GitHub.zip
-          rm .github/workflows/import-project.yml
+          rm -f .github/workflows/deploy.yml
+          rm -f NEXUS_CODE_iPhone_GitHub.zip
 
       - name: Commit extracted project
         run: |
