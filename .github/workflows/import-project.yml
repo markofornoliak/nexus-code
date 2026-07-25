@@ -1,0 +1,31 @@
+name: Import NEXUS project
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract project
+        run: |
+          set -e
+          unzip -o NEXUS_CODE_iPhone_GitHub.zip
+          test -f package.json
+          rm NEXUS_CODE_iPhone_GitHub.zip
+          rm .github/workflows/import-project.yml
+
+      - name: Commit extracted project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Import complete NEXUS CODE project"
+          git push
